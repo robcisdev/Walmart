@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="es" class="scroll-smooth"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blauLabs - Automatización OEE para Walmart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#4F46E5',
+                        accent: '#7C3AED'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 3s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    
+    <!-- Header/Navigation -->
+    <nav class="bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/a21c842e687adb0bcb9bcaea03b4fa9bdd6db195b4c78dc3bf3fd59c0b94645f?w=256&amp;h=128" alt="blauLabs by Softtek" class="h-8 w-auto">
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-white hover:text-cyan-300 transition-colors">Resumen</a>
+                    <a href="#features" class="text-white hover:text-cyan-300 transition-colors">Características</a>
+                    <a href="#pricing" class="text-white hover:text-cyan-300 transition-colors">Precios</a>
+                    <a href="#contact" class="text-white hover:text-cyan-300 transition-colors">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary/10 via-purple-50 to-blue-50 dark:from-primary/20 dark:via-gray-800 dark:to-gray-900 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-up">
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-6">
+                        <span class="text-primary">blauLabs</span><br>
+                        Automatización OEE<br>
+                        <span class="text-gray-600 dark:text-gray-400">para Walmart</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                        Solución integral de Industria 4.0 para automatizar la captura de datos OEE en entornos de fabricación con conectividad universal y análisis en tiempo real.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#pricing" class="bg-primary hover:bg-secondary text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105 text-center">
+                            Ver Precios
+                        </a>
+                        <a href="#overview" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-lg font-semibold transition-all text-center">
+                            Conocer Más
+                        </a>
+                    </div>
+                </div>
+                <div class="animate-float">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i data-lucide="trending-up" class="w-8 h-8 text-green-600"></i>
+                                </div>
+                                <h3 class="font-semibold">OEE en Tiempo Real</h3>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i data-lucide="network" class="w-8 h-8 text-blue-600"></i>
+                                </div>
+                                <h3 class="font-semibold">Conectividad Universal</h3>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i data-lucide="bell" class="w-8 h-8 text-purple-600"></i>
+                                </div>
+                                <h3 class="font-semibold">Alertas Inteligentes</h3>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i data-lucide="bar-chart" class="w-8 h-8 text-orange-600"></i>
+                                </div>
+                                <h3 class="font-semibold">Análisis Predictivo</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6">¿Qué es blauLabs?</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    blauLabs es un acelerador de soluciones integrales desarrollado por Softtek, diseñado para mejorar la eficiencia y el rendimiento de las operaciones de gestión digital y física.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="cpu" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Tecnología Operativa (OT)</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Conexión con SCADA, BMS, MES y otros sistemas industriales para visibilidad y control en tiempo real.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="server" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Tecnología de la Información (TI)</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Integración con servidores, bases de datos, plataformas en la nube y API para armonización de procesos.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i data-lucide="wifi" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Internet de las Cosas (IoT)</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Sensores inteligentes y dispositivos que extienden la conectividad a todos los rincones de la planta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6">Éxito Comprobado en Múltiples Sectores</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">blauLabs se ha implementado exitosamente en diversas industrias</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="monitor" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Supervisión de Centros de Datos</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Monitorización inteligente con dashboards automatizados y herramientas de anticipación de incidencias.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="cog" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Gestión de Rendimiento de Activos</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Visibilidad end-to-end, diagnósticos en tiempo real y análisis predictivos para optimización de equipos.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Optimización de Recursos</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Monitoreo y reducción del consumo de energía a través de análisis avanzados y seguimiento de KPI.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Sistema de Posicionamiento Unificado</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Seguimiento en tiempo real usando WiFi, Bluetooth y RFID para equipos, materiales y personal.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="link" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Productos Conectados</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Creación de servicios inteligentes basados en datos y nuevas fuentes de ingresos.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Gestión de Energía</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Reducción de costos operativos y impacto ambiental con simulaciones predictivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6">Módulos Funcionales</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Arquitectura modular y escalable para operaciones en tiempo real</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Capacidades Clave</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="activity" class="w-4 h-4 text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Supervisión en Tiempo Real</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Captura y procesamiento de datos de máquinas y sensores con visibilidad inmediata del estado de producción.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="calendar" class="w-4 h-4 text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Programación de Turnos</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Gestión de calendarios de turnos integrada con métricas de rendimiento para contextualizar la productividad.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="bell" class="w-4 h-4 text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Alertas Inteligentes</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Motor de alertas robusto con notificaciones vía SMS, email o in-app basadas en umbrales personalizables.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="smartphone" class="w-4 h-4 text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Acceso Multiplataforma</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Disponible en navegadores web y aplicaciones móviles para acceso desde cualquier ubicación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl">
+                    <h4 class="text-lg font-semibold mb-6 text-center">Estadísticas de Rendimiento</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium">Dispositivos IoT Gestionados</span>
+                                <span class="text-sm font-bold text-primary">30,000+</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium">Puntos de Datos/Segundo</span>
+                                <span class="text-sm font-bold text-green-600">1.5M</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium">Protocolos Soportados</span>
+                                <span class="text-sm font-bold text-blue-600">50+</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6">Precios para Walmart</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Solución escalable con precios competitivos</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- License Card -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-2 border-primary">
+                    <div class="bg-primary text-white p-6 text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="key" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Licencia blauLabs</h3>
+                        <p class="text-primary-100 mt-2">Para 5 máquinas industriales</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold mb-2">$3,500</div>
+                            <div class="text-gray-600 dark:text-gray-400">USD por año</div>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Hasta 5 máquinas industriales</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Dashboard en tiempo real</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Alertas inteligentes</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Reportes avanzados</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Soporte en español</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <div class="text-xs text-gray-500 mb-4">Precio base anual</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Implementation Card -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-secondary to-accent text-white p-6 text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="settings" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Implementación</h3>
+                        <p class="text-blue-100 mt-2">Configuración completa por máquina</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl font-bold mb-2">$1,000</div>
+                            <div class="text-gray-600 dark:text-gray-400">USD por máquina</div>
+                            <div class="text-sm text-primary font-semibold mt-2">*Precios decrecientes por volumen</div>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Configuración completa</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Conectividad universal</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Centralización de información</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Capacitación completa</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-5 h-5 text-green-600 mr-3"></i>
+                                <span class="text-sm">Documentación y soporte</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <div class="text-xs text-gray-500 mb-4">Costo único por máquina</div>
+                            <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                                <div class="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
+                                    Descuentos disponibles para implementaciones de mayor volumen
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Total Calculation -->
+            <div class="mt-12 max-w-2xl mx-auto">
+                <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Costo Total para 5 Máquinas</h3>
+                    <div class="grid md:grid-cols-3 gap-6 items-center">
+                        <div>
+                            <div class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Licencia Anual</div>
+                            <div class="text-2xl font-bold text-primary">$3,500</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Implementación</div>
+                            <div class="text-2xl font-bold text-secondary">$5,000</div>
+                            <div class="text-sm text-gray-500">(5 máquinas × $1,000)</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Total Primer Año</div>
+                            <div class="text-3xl font-bold text-accent">$8,500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-6">¿Necesitas una Implementación Más Agresiva?</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                Para implementaciones personalizadas y eficiencias avanzadas, nuestro equipo de expertos está listo para ayudarte.
+            </p>
+            
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 max-w-lg mx-auto">
+                <div class="mb-6">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="users" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Contacta a Nuestro Equipo</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Diseñaremos una solución personalizada que se adapte perfectamente a las necesidades específicas de Walmart.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="handleContact('advanced')" class="w-full bg-primary hover:bg-secondary text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        Solicitar Consultoría Avanzada
+                    </button>
+                    <button onclick="handleContact('demo')" class="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white py-3 px-6 rounded-lg font-semibold transition-all">
+                        Agendar Demo Personalizado
+                    </button>
+                </div>
+                
+                <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            <span>roberto.cisneros@softtek.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/a21c842e687adb0bcb9bcaea03b4fa9bdd6db195b4c78dc3bf3fd59c0b94645f?w=256&amp;h=128" alt="blauLabs by Softtek" class="h-8 w-auto">
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Solución integral de Industria 4.0 desarrollada por Softtek para automatización OEE.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Características</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Conectividad Universal</li>
+                        <li>Análisis en Tiempo Real</li>
+                        <li>Alertas Inteligentes</li>
+                        <li>Reportes Avanzados</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contacto</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            <span>roberto.cisneros@softtek.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="globe" class="w-4 h-4 mr-2"></i>
+                            <span>www.softtek.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 Valores Corporativos Softtek S.A. de C.V. Todos los derechos reservados. Confidencial.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact handlers
+        function handleContact(type) {
+            const messages = {
+                advanced: 'Solicitud de consultoría avanzada para implementación personalizada de blauLabs en Walmart. Necesitamos discutir eficiencias específicas y configuraciones personalizadas.',
+                demo: 'Solicitud de demo personalizado de blauLabs para Walmart. Nos interesa ver las capacidades de la plataforma aplicadas a nuestro entorno industrial.'
+            };
+            
+            const subject = type === 'advanced' ? 'Consultoría Avanzada blauLabs - Walmart' : 'Demo Personalizado blauLabs - Walmart';
+            const body = messages[type];
+            
+            const emailLink = `mailto:roberto.cisneros@softtek.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(emailLink);
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+
+
+</body></html>
